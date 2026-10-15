@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 function NotFoundPage(): JSX.Element {
   return (
-    <div style={{ textAlign: 'center', paddingTop: '80px' }}>
+    <div className="not-found">
       <h1>404 Not Found</h1>
-      <Link to="/">Вернуться на главную</Link>
+      <Link to={AppRoute.Main}>Вернуться на главную</Link>
     </div>
   );
 }
