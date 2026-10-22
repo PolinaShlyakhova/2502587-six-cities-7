@@ -1,5 +1,5 @@
-import { Link, generatePath } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
+import { getOfferUrl } from '../../const';
 import type { Offer } from '../../types';
 
 type PlaceCardProps = {
@@ -11,7 +11,7 @@ type PlaceCardProps = {
 
 function PlaceCard({offer, isActive = false, onMouseEnter, onMouseLeave,}: PlaceCardProps) : JSX.Element {
   const {id, title, type, price, isPremium, isFavorite, rating, previewImage} = offer;
-  const offerUrl = generatePath(AppRoute.Offer, { id });
+  const offerUrl = getOfferUrl(id);
 
   return (
     <article

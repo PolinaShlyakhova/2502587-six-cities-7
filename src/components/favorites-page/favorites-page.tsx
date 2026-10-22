@@ -1,7 +1,7 @@
-import PlaceCard from '../place-card/place-card';
-import type { Offer } from '../../types';
 import { Link } from 'react-router-dom';
+import PlaceCard from '../place-card/place-card';
 import { AppRoute } from '../../const';
+import type { Offer } from '../../types';
 
 type FavoritesPageProps = {
   offers: Offer[];

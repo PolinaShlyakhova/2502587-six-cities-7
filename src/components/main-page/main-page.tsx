@@ -1,7 +1,7 @@
-import OffersList from '../offers-list/offers-list';
-import type { Offer } from '../../types';
 import { Link } from 'react-router-dom';
+import OffersList from '../offers-list/offers-list';
 import { AppRoute } from '../../const';
+import type { Offer } from '../../types';
 
 type MainPageProps = {
   offers: Offer[];
