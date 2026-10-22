@@ -52,7 +52,9 @@ function Map({ offers, city, selectedOfferId }: MapProps): JSX.Element {
 
   useEffect(() => {
     const map = mapInstanceRef.current;
-    if (!map) return;
+    if (!map) {
+      return;
+    }
 
     offers.forEach((offer) => {
       if (!markersRef.current[offer.id]) {
