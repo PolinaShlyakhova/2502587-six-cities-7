@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import OffersList from '../offers-list/offers-list';
+import Map from '../map/map';
 import { AppRoute } from '../../const';
 import type { Offer } from '../../types';
 
@@ -8,6 +10,9 @@ type MainPageProps = {
 };
 
 function MainPage({ offers }: MainPageProps): JSX.Element {
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const currentCity = offers[0]?.city;
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -96,10 +101,20 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers} />
+              <OffersList
+                offers={offers}
+                activeOfferId={activeOfferId}
+                onCardHover={setActiveOfferId}
+              />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              {currentCity && (
+                <Map
+                  offers={offers}
+                  city={currentCity}
+                  selectedOfferId={activeOfferId}
+                />
+              )}
             </div>
           </div>
         </div>
