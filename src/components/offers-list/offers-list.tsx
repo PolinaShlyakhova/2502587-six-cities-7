@@ -10,12 +10,12 @@ type OffersListProps = {
 };
 
 function OffersList({
-                      offers,
-                      variant = 'cities',
-                      className = 'cities__places-list places__list tabs__content',
-                      activeOfferId,
-                      onCardHover
-  }: OffersListProps): JSX.Element {
+  offers,
+  variant = 'cities',
+  className = 'cities__places-list places__list tabs__content',
+  activeOfferId,
+  onCardHover
+}: OffersListProps): JSX.Element {
   return (
     <div className={className}>
       {offers.map((offer) => (
