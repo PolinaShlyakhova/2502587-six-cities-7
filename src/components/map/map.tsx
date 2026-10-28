@@ -18,7 +18,7 @@ const activeIcon = L.icon({
 type MapProps = {
   offers: Offer[];
   city: City;
-  selectedOfferId?: string | null;
+  selectedOfferId: string | null;
 };
 
 function Map({ offers, city, selectedOfferId }: MapProps): JSX.Element {

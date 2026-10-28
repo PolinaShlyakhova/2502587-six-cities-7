@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
-import { AppRoute } from '../../const';
+import { AppRoute, DEFAULT_CITY } from '../../const';
 import type { Offer } from '../../types';
 
 type MainPageProps = {
@@ -11,7 +11,7 @@ type MainPageProps = {
 
 function MainPage({ offers }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const currentCity = offers[0]?.city;
+  const currentCity = offers[0]?.city || DEFAULT_CITY;
 
   return (
     <div className="page page--gray page--main">
@@ -108,13 +108,11 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
               />
             </section>
             <div className="cities__right-section">
-              {currentCity && (
-                <Map
-                  offers={offers}
-                  city={currentCity}
-                  selectedOfferId={activeOfferId}
-                />
-              )}
+              <Map
+                offers={offers}
+                city={currentCity}
+                selectedOfferId={activeOfferId}
+              />
             </div>
           </div>
         </div>
