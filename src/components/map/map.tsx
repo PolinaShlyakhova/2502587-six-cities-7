@@ -19,15 +19,18 @@ type MapProps = {
   offers: Offer[];
   city: City;
   selectedOfferId: string | null;
+  className?: string;
 };
 
-function Map({ offers, city, selectedOfferId }: MapProps): JSX.Element {
+function Map({ offers, city, selectedOfferId, className = 'cities__map' }: MapProps): JSX.Element {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersRef = useRef<Record<string, L.Marker>>({});
 
   useEffect(() => {
     if (mapRef.current !== null && mapInstanceRef.current === null) {
+      mapRef.current.innerHTML = '';
+
       const map = L.map(mapRef.current, {
         center: [city.location.latitude, city.location.longitude],
         zoom: city.location.zoom,
@@ -80,7 +83,7 @@ function Map({ offers, city, selectedOfferId }: MapProps): JSX.Element {
     });
   }, [selectedOfferId]);
 
-  return <div className="cities__map map" ref={mapRef} style={{ height: '100%' }} />;
+  return <div className={`map ${className}`} ref={mapRef} style={{ height: '100%' }} />;
 }
 
 export default Map;

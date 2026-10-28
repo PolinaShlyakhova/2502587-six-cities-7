@@ -68,7 +68,7 @@ function FavoritesPage({ offers }: FavoritesPageProps) : JSX.Element {
                   </div>
                   <div className="favorites__places">
                     {cityOffers.map((offer) => (
-                      <PlaceCard key={offer.id} offer={offer} />
+                      <PlaceCard key={offer.id} offer={offer} variant="favorites"/>
                     ))}
                   </div>
                 </li>
