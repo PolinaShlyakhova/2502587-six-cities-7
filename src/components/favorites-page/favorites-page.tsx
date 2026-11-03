@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
 import PlaceCard from '../place-card/place-card';
+import { useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
 import type { Offer } from '../../types';
 
-type FavoritesPageProps = {
-  offers: Offer[];
-};
-
-function FavoritesPage({ offers }: FavoritesPageProps) : JSX.Element {
+function FavoritesPage() : JSX.Element {
+  const { offers } = useAppSelector((state) => state);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   const offersByCity = favoriteOffers.reduce<Record<string, Offer[]>>(

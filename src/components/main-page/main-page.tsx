@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
-import { AppRoute, DEFAULT_CITY } from '../../const';
-import type { Offer } from '../../types';
+import CitiesList from '../cities-list/cities-list';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { changeCity } from '../../store/reducer';
+import { AppRoute, CITIES } from '../../const';
 
-type MainPageProps = {
-  offers: Offer[];
-};
-
-function MainPage({ offers }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
+  const dispatch = useAppDispatch();
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const currentCity = offers[0]?.city || DEFAULT_CITY;
+  const { city, offers } = useAppSelector((state) => state);
+  const filteredOffers = offers.filter((offer) => offer.city.name === city.name);
 
   return (
     <div className="page page--gray page--main">
@@ -47,45 +47,18 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                  <span>Paris</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                  <span>Cologne</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                  <span>Brussels</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item tabs__item--active" to={AppRoute.Main}>
-                  <span>Amsterdam</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                  <span>Hamburg</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
-                  <span>Dusseldorf</span>
-                </Link>
-              </li>
-            </ul>
+            <CitiesList
+              cities={CITIES}
+              currentCity={city}
+              onCityClick={(newCity) => dispatch(changeCity(newCity))}
+            />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{filteredOffers.length} places to stay in {city.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -102,15 +75,15 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <OffersList
-                offers={offers}
+                offers={filteredOffers}
                 activeOfferId={activeOfferId}
                 onCardHover={setActiveOfferId}
               />
             </section>
             <div className="cities__right-section">
               <Map
-                offers={offers}
-                city={currentCity}
+                offers={filteredOffers}
+                city={city}
                 selectedOfferId={activeOfferId}
               />
             </div>
