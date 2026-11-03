@@ -30,7 +30,7 @@ export type User = {
   isPro: boolean;
 };
 
-export type Review = {
+export type ReviewData = {
   id: string;
   date: string;
   user: User;

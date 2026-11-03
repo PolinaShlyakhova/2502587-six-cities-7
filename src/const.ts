@@ -1,5 +1,8 @@
 import type { City, Rating} from './types';
 
+export const ICON_SIZE: [number, number] = [27, 39];
+export const ICON_ANCHOR: [number, number] = [13.5, 39];
+
 export const DEFAULT_CITY: City = {
   name: 'Amsterdam',
   location: {

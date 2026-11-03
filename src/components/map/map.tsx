@@ -1,18 +1,19 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import type { Offer, City } from '../../types';
+import { ICON_SIZE, ICON_ANCHOR } from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 const defaultIcon = L.icon({
   iconUrl: '/img/pin.svg',
-  iconSize: [27, 39],
-  iconAnchor: [13.5, 39],
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR,
 });
 
 const activeIcon = L.icon({
   iconUrl: '/img/pin-active.svg',
-  iconSize: [27, 39],
-  iconAnchor: [13.5, 39],
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR,
 });
 
 type MapProps = {
