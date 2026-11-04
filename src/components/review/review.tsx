@@ -1,12 +1,10 @@
-import type { Review as ReviewType } from '../../types';
+import type { ReviewData } from '../../types';
 
 type ReviewProps = {
-  review: ReviewType;
+  review: ReviewData;
 };
 
-function Review({ review }: ReviewProps): JSX.Element {
-  const { user, comment, date, rating } = review;
-
+function Review({ review: { user, comment, date, rating } }: ReviewProps): JSX.Element {
   const dateObj = new Date(date);
   const formattedDate = dateObj.toLocaleString('en-US', {
     month: 'long',

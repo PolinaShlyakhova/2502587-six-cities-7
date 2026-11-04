@@ -1,8 +1,8 @@
 import Review from '../review/review';
-import type { Review as ReviewType } from '../../types';
+import type { ReviewData } from '../../types';
 
 type ReviewsListProps = {
-  reviews: ReviewType[];
+  reviews: ReviewData[];
 };
 
 function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {

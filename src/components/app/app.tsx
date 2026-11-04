@@ -6,23 +6,18 @@ import FavoritesPage from '../favorites-page/favorites-page';
 import OfferPage from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../const';
-import type { Offer } from '../../types';
 
-type AppProps = {
-  offers: Offer[];
-};
-
-function App({ offers }: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage offers={offers} />}/>
+        <Route path={AppRoute.Main} element={<MainPage />}/>
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute isAuthorized={false}>
-              <FavoritesPage offers={offers} />
+              <FavoritesPage />
             </PrivateRoute>
           }
         />

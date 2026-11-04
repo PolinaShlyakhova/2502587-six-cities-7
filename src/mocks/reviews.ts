@@ -1,6 +1,6 @@
-import type { Review } from '../types';
+import type { ReviewData } from '../types';
 
-export const reviews: Review[] = [
+export const reviews: ReviewData[] = [
   {
     id: 'r1',
     date: '2019-04-24',
