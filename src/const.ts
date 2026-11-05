@@ -1,4 +1,4 @@
-import type { Rating, City } from './types';
+import type { Rating, City, SortType } from './types';
 
 export const ICON_SIZE: [number, number] = [27, 39];
 export const ICON_ANCHOR: [number, number] = [13.5, 39];
@@ -28,3 +28,10 @@ export enum AppRoute {
 }
 
 export const getOfferUrl = (id: string): string => `/offer/${id}`;
+
+export const SORT_TYPES: Record<SortType, string> = {
+  'popular': 'Popular',
+  'price-low': 'Price: low to high',
+  'price-high': 'Price: high to low',
+  'rating': 'Top rated first',
+};

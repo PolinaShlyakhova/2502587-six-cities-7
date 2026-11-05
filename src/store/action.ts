@@ -1,1 +1,1 @@
-export { changeCity, fillOffers } from './reducer';
+export { changeCity, fillOffers, changeSortType } from './reducer';

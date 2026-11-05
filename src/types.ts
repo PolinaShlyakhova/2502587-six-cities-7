@@ -37,3 +37,5 @@ export type ReviewData = {
   comment: string;
   rating: Rating;
 };
+
+export type SortType = 'popular' | 'price-low' | 'price-high' | 'rating';
