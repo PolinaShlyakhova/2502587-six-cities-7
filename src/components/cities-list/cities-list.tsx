@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import { AppRoute } from '../../const';
 import type { City } from '../../types';
 
@@ -14,9 +15,9 @@ function CitiesList({ cities, currentCity, onCityClick }: CitiesListProps): JSX.
       {cities.map((city) => (
         <li className="locations__item" key={city.name}>
           <Link
-            className={`locations__item-link tabs__item ${
-              city.name === currentCity.name ? 'tabs__item--active' : ''
-            }`}
+            className={classNames('locations__item-link tabs__item', {
+              'tabs__item--active': city.name === currentCity.name,
+            })}
             to={AppRoute.Main}
             onClick={() => onCityClick(city)}
           >
