@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import { getOfferUrl } from '../../const';
 import type { Offer } from '../../types';
 
@@ -21,7 +22,7 @@ function PlaceCard({offer, variant = 'cities', isActive = false, onMouseEnter, o
 
   return (
     <article
-      className={`${cardClass} ${isActive ? 'place-card--active' : ''}`}
+      className={classNames(cardClass, { 'place-card--active': isActive })}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -43,7 +44,12 @@ function PlaceCard({offer, variant = 'cities', isActive = false, onMouseEnter, o
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`} type="button">
+          <button
+            className={classNames('place-card__bookmark-button button', {
+              'place-card__bookmark-button--active': isFavorite,
+            })}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
