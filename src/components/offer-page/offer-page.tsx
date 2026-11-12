@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, CITIES } from '../../const';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
-import { reviews } from '../../mocks/reviews';
-import { offers } from '../../mocks/offers';
+import type { Offer } from '../../types';
 
 function OfferPage() : JSX.Element {
-  const nearbyOffers = offers.slice(0, 3);
+  const nearbyOffers: Offer[] = [];
+  const currentCity = CITIES[3];
 
   return (
     <div className="page">
@@ -164,7 +164,7 @@ function OfferPage() : JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <ReviewsList reviews={reviews} />
+                <ReviewsList reviews={[]} />
                 <ReviewForm />
               </section>
             </div>
@@ -172,7 +172,7 @@ function OfferPage() : JSX.Element {
           <section className="offer__map map">
             <Map
               offers={nearbyOffers}
-              city={offers[0].city}
+              city={currentCity}
               selectedOfferId={null}
             />
           </section>
