@@ -25,6 +25,7 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
+  NotFound = '/404',
 }
 
 export const getOfferUrl = (id: string): string => `/offer/${id}`;
@@ -35,3 +36,9 @@ export const SORT_TYPES: Record<SortType, string> = {
   'price-high': 'Price: high to low',
   'rating': 'Top rated first',
 };
+
+export const AuthorizationStatus = {
+  Unknown: 'UNKNOWN',
+  Auth: 'AUTH',
+  NoAuth: 'NO_AUTH',
+} as const;
