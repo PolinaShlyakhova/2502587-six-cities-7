@@ -21,9 +21,11 @@ function LoginPage() : JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (email && password.trim().length > 0) {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+    if (trimmedEmail && trimmedPassword) {
       const doLogin = async () => {
-        const resultAction = await dispatch(login({ email, password }));
+        const resultAction = await dispatch(login({ email: trimmedEmail, password: trimmedPassword }));
         if (login.fulfilled.match(resultAction)) {
           navigate(AppRoute.Main);
         }
@@ -72,6 +74,8 @@ function LoginPage() : JSX.Element {
                   name="password"
                   placeholder="Password"
                   required
+                  pattern="^(?=.*[a-zA-Z])(?=.*\d).+$"
+                  title="Пароль должен содержать хотя бы одну букву и одну цифру"
                   value={password}
                   onChange={handlePasswordChange}
                 />

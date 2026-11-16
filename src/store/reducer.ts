@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 import type { AxiosInstance, AxiosError } from 'axios';
-import { CITIES } from '../const';
+import { CITIES, AuthorizationStatus } from '../const';
 import type { City, Offer, SortType, AuthStatus, UserData } from '../types';
 
 export type AppState = {
@@ -90,7 +90,7 @@ const initialState: AppState = {
   sortType: 'popular',
   isOffersLoading: false,
   offersError: null,
-  authorizationStatus: 'UNKNOWN',
+  authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
   authError: null,
 };
@@ -112,7 +112,7 @@ const appSlice = createSlice({
       state.authorizationStatus = action.payload;
     },
     logout(state) {
-      state.authorizationStatus = 'NO_AUTH';
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
       state.user = null;
     },
   },
@@ -136,17 +136,17 @@ const appSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.authorizationStatus = 'AUTH';
+        state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(login.rejected, (state, action) => {
         state.authError = action.payload || 'Ошибка авторизации';
       })
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.authorizationStatus = 'AUTH';
+        state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(checkAuth.rejected, (state) => {
-        state.authorizationStatus = 'NO_AUTH';
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
       });
   },
 });

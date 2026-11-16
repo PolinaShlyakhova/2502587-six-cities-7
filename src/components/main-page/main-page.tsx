@@ -6,7 +6,7 @@ import CitiesList from '../cities-list/cities-list';
 import SortingOptions from '../sorting-options/sorting-options';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { changeCity, logout } from '../../store/reducer';
-import { AppRoute, CITIES } from '../../const';
+import { AppRoute, CITIES, AuthorizationStatus } from '../../const';
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -44,7 +44,7 @@ function MainPage(): JSX.Element {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {authorizationStatus === 'AUTH' ? (
+                {authorizationStatus === AuthorizationStatus.Auth ? (
                   <>
                     <li className="header__nav-item user">
                       <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>

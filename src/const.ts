@@ -35,3 +35,9 @@ export const SORT_TYPES: Record<SortType, string> = {
   'price-high': 'Price: high to low',
   'rating': 'Top rated first',
 };
+
+export const AuthorizationStatus = {
+  Unknown: 'UNKNOWN',
+  Auth: 'AUTH',
+  NoAuth: 'NO_AUTH',
+} as const;
