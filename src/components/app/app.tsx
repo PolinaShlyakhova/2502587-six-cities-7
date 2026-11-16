@@ -42,6 +42,7 @@ function App(): JSX.Element {
           }
         />
         <Route path={AppRoute.Offer} element={<OfferPage />}/>
+        <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

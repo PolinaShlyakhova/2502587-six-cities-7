@@ -1,8 +1,17 @@
-import { useState, type ChangeEvent, Fragment } from 'react';
+import { useState, type ChangeEvent, Fragment, type FormEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { postReview } from '../../store/reducer';
 import type { Rating } from '../../types';
 import { RATING_OPTIONS } from '../../const';
 
-function ReviewForm(): JSX.Element {
+type ReviewFormProps = {
+  offerId: string;
+};
+
+function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isPosting = useAppSelector((state) => state.isReviewsLoading);
+
   const [rating, setRating] = useState<Rating | 0>(0);
   const [review, setReview] = useState('');
 
@@ -14,8 +23,25 @@ function ReviewForm(): JSX.Element {
     setReview(evt.target.value);
   };
 
+  const isValid = rating > 0 && review.trim().length >= 50 && review.trim().length <= 300;
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (isValid) {
+      dispatch(postReview({ offerId, comment: review.trim(), rating }))
+        .unwrap()
+        .then(() => {
+          setRating(0);
+          setReview('');
+        })
+        .catch(() => {
+        });
+    }
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -64,7 +90,7 @@ function ReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={!isValid || isPosting}
         >
           Submit
         </button>

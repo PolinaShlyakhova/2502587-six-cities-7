@@ -24,6 +24,21 @@ export type Offer = {
   previewImage: string;
 };
 
+export type FullOffer = Offer & {
+  description: string;
+  bedrooms: number;
+  maxAdults: number;
+  goods: string[];
+  host: Host;
+  images: string[];
+};
+
+export type Host = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
 export type User = {
   name: string;
   avatarUrl: string;
